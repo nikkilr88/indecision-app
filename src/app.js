@@ -16,10 +16,19 @@ const onFormSubmit = e => {
   }
 }
 
+const onMakeDecision = () => {
+  const rand = Math.floor(Math.random() * app.options.length)
+
+  const option = app.options[rand]
+  alert(option)
+}
+
 const removeAll = () => {
   app.options = []
   render()
 }
+
+const numbers = [42, 77, 9]
 
 const render = () => {
   const template = (
@@ -28,13 +37,16 @@ const render = () => {
       {app.subTitle && <p>{app.subTitle}</p>}
 
       <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-      <p>{app.options.length}</p>
+
+      <button disabled={app.options.length === 0} onClick={onMakeDecision}>
+        What should I do?
+      </button>
       <button onClick={removeAll}>Remove All</button>
 
       <ol>
-        <li>List item</li>
-        <li>List item</li>
-        <li>List item</li>
+        {app.options.map(option => (
+          <li>{option}</li>
+        ))}
       </ol>
 
       <form onSubmit={onFormSubmit}>
