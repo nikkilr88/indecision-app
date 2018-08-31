@@ -1,28 +1,40 @@
-let isShowing = false
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props)
 
-const toggle = () => {
-  isShowing = !isShowing
-  render()
-}
+    this.state = {
+      isShowing: false
+    }
 
-const render = () => {
-  const App = (
-    <div>
-      <h1>Visibility Toggle</h1>
-      <button onClick={toggle}>
-        {!isShowing ? 'Show Details' : 'Hide Details'}
-      </button>
-      {isShowing && (
-        <div>
+    this.handleToggle = this.handleToggle.bind(this)
+  }
+
+  handleToggle() {
+    this.setState(prevState => {
+      return {
+        isShowing: !prevState.isShowing
+      }
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Visibility Toggle</h1>
+
+        <button onClick={this.handleToggle}>
+          {!this.state.isShowing ? 'Show details' : 'Hide details'}
+        </button>
+
+        {this.state.isShowing && (
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-            itaque.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
+            nulla?
           </p>
-        </div>
-      )}
-    </div>
-  )
-  ReactDOM.render(App, document.getElementById('root'))
+        )}
+      </div>
+    )
+  }
 }
 
-render()
+ReactDOM.render(<Toggle />, document.getElementById('root'))
