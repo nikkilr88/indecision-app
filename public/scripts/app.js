@@ -53,7 +53,6 @@ var App = function (_React$Component) {
       }
 
       this.setState(function (prevState) {
-        console.log(prevState);
         return {
           options: prevState.options.concat(option)
         };
