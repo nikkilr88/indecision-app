@@ -8,11 +8,18 @@ class App extends React.Component {
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
     this.handlePick = this.handlePick.bind(this)
     this.handleAddOption = this.handleAddOption.bind(this)
+    this.handleDeleteOption = this.handleDeleteOption.bind(this)
   }
 
   handleDeleteOptions() {
     this.setState(() => ({
       options: []
+    }))
+  }
+
+  handleDeleteOption(option) {
+    this.setState(prevState => ({
+      options: prevState.options.filter(prevOption => prevOption != option)
     }))
   }
 
@@ -48,6 +55,7 @@ class App extends React.Component {
         />
         <Options
           options={this.state.options}
+          handleDeleteOption={this.handleDeleteOption}
           handleDeleteOptions={this.handleDeleteOptions}
         />
         <AddOption handleAddOption={this.handleAddOption} />
@@ -85,7 +93,11 @@ const Action = props => {
 
 const Options = props => {
   const optionsList = props.options.map((option, i) => (
-    <Option key={i} text={option} />
+    <Option
+      key={i}
+      optionText={option}
+      handleDeleteOption={props.handleDeleteOption}
+    />
   ))
 
   return (
@@ -97,7 +109,18 @@ const Options = props => {
 }
 
 const Option = props => {
-  return <p>{props.text}</p>
+  return (
+    <div>
+      {props.optionText}
+      <button
+        onClick={e => {
+          props.handleDeleteOption(props.optionText)
+        }}
+      >
+        &times;
+      </button>
+    </div>
+  )
 }
 
 class AddOption extends React.Component {
