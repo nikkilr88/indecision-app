@@ -10,10 +10,13 @@
     "babel-preset-react": "6.24.1"
   },
   "scripts": {
-    "dev": "concurrently -n server,babel \"live-server public\" \"babel src/app.js --out-file public/scripts/app.js --presets env,react --watch\""
+    "dev": "concurrently -n server,babel \"live-server public\" \"babel src/app.js --out-file public/scripts/app.js --presets env,react --watch\"",
+    "build": "webpack --watch"
   },
   "devDependencies": {
+    "babel-cli": "6.24.1",
     "concurrently": "^4.0.1",
-    "live-server": "^1.2.0"
+    "live-server": "^1.2.0",
+    "webpack": "3.1.0"
   }
 }
