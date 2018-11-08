@@ -6,16 +6,39 @@ import Action from './Action'
 import Header from './Header'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      options: props.options
+  state = {
+    options: []
+  }
+
+  handleDeleteOptions = () => {
+    this.setState(() => ({
+      options: []
+    }))
+  }
+
+  handleDeleteOption = option => {
+    this.setState(prevState => ({
+      options: prevState.options.filter(prevOption => prevOption != option)
+    }))
+  }
+
+  handlePick = () => {
+    let rand = Math.floor(Math.random() * this.state.options.length)
+    let pick = this.state.options[rand]
+
+    alert(pick)
+  }
+
+  handleAddOption = option => {
+    if (!option) {
+      return 'Enter valid value'
+    } else if (this.state.options.indexOf(option) > -1) {
+      return 'This options already exists'
     }
 
-    this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
-    this.handlePick = this.handlePick.bind(this)
-    this.handleAddOption = this.handleAddOption.bind(this)
-    this.handleDeleteOption = this.handleDeleteOption.bind(this)
+    this.setState(prevState => ({
+      options: prevState.options.concat(option)
+    }))
   }
 
   componentDidMount() {
@@ -40,37 +63,6 @@ class App extends React.Component {
 
   componentWillUnmount() {
     console.log('Component unmounted')
-  }
-
-  handleDeleteOptions() {
-    this.setState(() => ({
-      options: []
-    }))
-  }
-
-  handleDeleteOption(option) {
-    this.setState(prevState => ({
-      options: prevState.options.filter(prevOption => prevOption != option)
-    }))
-  }
-
-  handlePick() {
-    let rand = Math.floor(Math.random() * this.state.options.length)
-    let pick = this.state.options[rand]
-
-    alert(pick)
-  }
-
-  handleAddOption(option) {
-    if (!option) {
-      return 'Enter valid value'
-    } else if (this.state.options.indexOf(option) > -1) {
-      return 'This options already exists'
-    }
-
-    this.setState(prevState => ({
-      options: prevState.options.concat(option)
-    }))
   }
 
   render() {
