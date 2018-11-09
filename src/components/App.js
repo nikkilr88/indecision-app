@@ -4,10 +4,12 @@ import AddOption from './AddOption'
 import Options from './Options'
 import Action from './Action'
 import Header from './Header'
+import OptionModal from './OptionModal'
 
 class App extends React.Component {
   state = {
-    options: []
+    options: [],
+    selectedOption: undefined
   }
 
   handleDeleteOptions = () => {
@@ -22,11 +24,17 @@ class App extends React.Component {
     }))
   }
 
+  handleDeleteSelected = () => {
+    this.setState(() => ({
+      selectedOption: undefined
+    }))
+  }
+
   handlePick = () => {
     let rand = Math.floor(Math.random() * this.state.options.length)
-    let pick = this.state.options[rand]
+    let selectedOption = this.state.options[rand]
 
-    alert(pick)
+    this.setState(() => ({ selectedOption }))
   }
 
   handleAddOption = option => {
@@ -82,6 +90,11 @@ class App extends React.Component {
           handleDeleteOptions={this.handleDeleteOptions}
         />
         <AddOption handleAddOption={this.handleAddOption} />
+
+        <OptionModal
+          selectedOption={this.state.selectedOption}
+          handleDeleteSelected={this.handleDeleteSelected}
+        />
       </div>
     )
   }
