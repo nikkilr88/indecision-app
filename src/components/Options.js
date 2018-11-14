@@ -13,7 +13,12 @@ const Options = props => {
 
   return (
     <div>
-      <button onClick={props.handleDeleteOptions}>Remove all</button>
+      <button
+        className="button button--link"
+        onClick={props.handleDeleteOptions}
+      >
+        Remove all
+      </button>
       {props.options.length === 0 && <p>No items</p>}
       {optionsList}
     </div>
