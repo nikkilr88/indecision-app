@@ -23,12 +23,13 @@ class AddOption extends React.Component {
   render() {
     return (
       <div>
-        {' '}
-        {this.state.error && <p> {this.state.error} </p>}{' '}
-        <form onSubmit={this.onFormSubmit.bind(this)}>
-          <input type="text" name="option" />
-          <button className="button button--small"> Add Option </button>{' '}
-        </form>{' '}
+        {this.state.error && (
+          <p className="add-option-error"> {this.state.error} </p>
+        )}{' '}
+        <form className="add-option" onSubmit={this.onFormSubmit.bind(this)}>
+          <input className="add-option__input" type="text" name="option" />
+          <button className="button button--small"> Add Option </button>
+        </form>
       </div>
     )
   }
