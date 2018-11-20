@@ -5,7 +5,7 @@
   &--big {
     width: 100%;
     padding: 2.4rem;
-    margin-bottom: $xl-size;
+    margin-bottom: $m-size;
     background: $purple;
     border-bottom: 0.6rem solid darken($purple, 10%);
     color: white;
@@ -31,5 +31,13 @@
   &:disabled {
     opacity: 0.5;
     cursor: default;
+  }
+}
+
+@media (min-width: $desktop-breakpoint) {
+  .button {
+    &--big {
+      margin-bottom: $xl-size;
+    }
   }
 }
